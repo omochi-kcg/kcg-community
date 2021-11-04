@@ -1,56 +1,65 @@
-# For more information: https://laravel.com/docs/sail
-version: '3'
+version: "3.3"
 services:
-    laravel.test:
+    app:
         build:
-            context: ./vendor/laravel/sail/runtimes/8.0
-            dockerfile: Dockerfile
             args:
-                WWWGROUP: '${WWWGROUP}'
-        image: sail-8.0/app
-        extra_hosts:
-            - 'host.docker.internal:host-gateway'
-        ports:
-            - '${APP_PORT:-80}:80'
-        environment:
-            WWWUSER: '${WWWUSER}'
-            LARAVEL_SAIL: 1
-            XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
-            XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
+                user: user
+                uid: 1000
+            context: ./
+            dockerfile: Dockerfile
+        image: app-image
+        container_name: app-app
+        restart: unless-stopped
+        working_dir: /var/www/
         volumes:
-            - '.:/var/www/html'
+            - ./:/var/www
         networks:
-            - sail
+            - app-network
+
+    db:
+        image: mysql:5.7
+        container_name: app-db
+        restart: unless-stopped
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_USER: ${DB_USERNAME}
+            SERVICE_TAGS: dev
+            SERVICE_NAME: mysql
+        volumes:
+            - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+        networks:
+            - app-network
+
+    nginx:
+        image: nginx:alpine
+        container_name: app-nginx
+        restart: unless-stopped
+        ports:
+            - ${APP_PORT}:80
+        volumes:
+            - ./:/var/www
+            - ./docker-compose/nginx:/etc/nginx/conf.d/
+        networks:
+            - app-network
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        restart: always
+        environment:
+            PMA_ARBITRARY: 1
+            PMA_HOST: "${DB_HOST}"
+            PMA_USER: "${DB_USERNAME}"
+            PMA_PASSWORD: "${DB_PASSWORD}"
+        ports:
+            - 8080:80
+        volumes:
+            - ./infra/docker/phpmyadmin/sessions:/sessions
+        networks:
+            - app-network
         depends_on:
-            - mariadb
-    mariadb:
-        image: 'mariadb:10'
-        ports:
-            - '${FORWARD_DB_PORT:-3306}:3306'
-        environment:
-            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
-            MYSQL_DATABASE: '${DB_DATABASE}'
-            MYSQL_USER: '${DB_USERNAME}'
-            MYSQL_PASSWORD: '${DB_PASSWORD}'
-            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-        volumes:
-            - 'sailmariadb:/var/lib/mysql'
-        networks:
-            - sail
-        healthcheck:
-            test: ["CMD", "mysqladmin", "ping", "-p${DB_PASSWORD}"]
-            retries: 3
-            timeout: 5s
-    mailhog:
-        image: 'mailhog/mailhog:latest'
-        ports:
-            - '${FORWARD_MAILHOG_PORT:-1025}:1025'
-            - '${FORWARD_MAILHOG_DASHBOARD_PORT:-8025}:8025'
-        networks:
-            - sail
+            - db
+
 networks:
-    sail:
+    app-network:
         driver: bridge
-volumes:
-    sailmariadb:
-        driver: local
