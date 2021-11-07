@@ -30,19 +30,3 @@ services:
             SERVICE_NAME: mysql
         volumes:
             - ./docker-compose/mysql:/docker-entrypoint-initdb.d
-
-    phpmyadmin:
-        image: phpmyadmin/phpmyadmin
-        container_name: laravel-phpmyadmin
-        restart: always
-        environment:
-            PMA_ARBITRARY: 1
-            PMA_HOST: "${DB_HOST}"
-            PMA_USER: "${DB_USERNAME}"
-            PMA_PASSWORD: "${DB_PASSWORD}"
-        ports:
-            - 8080:80
-        volumes:
-            - ./infra/docker/phpmyadmin/sessions:/sessions
-        depends_on:
-            - db
