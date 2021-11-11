@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomesController::class, 'top']);
+Route::get('/', [HomesController::class, 'top'])
+    ->name('homes.top');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
