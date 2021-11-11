@@ -1,38 +1,39 @@
-FROM php:8.0-fpm
+FROM php:8.0-apache
 
 # Arguments defined in docker-compose.yml
 ARG user
 ARG uid
 
-# Accept EULA
-ENV ACCEPT_EULA=Y
-
-# Supress apt-key warning
-ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=Y
-
-# Fix debconf warnings upon build
-ARG DEBIAN_FRONTEND=noninteractive
-
-# Install system dependencies
+# OS packages
 RUN apt-get update && apt-get install -y \
-    git \
-    curl \
-    libzip-dev \
+    libfreetype6-dev \
     libpng-dev \
-    libonig-dev \
-    libxml2-dev \
+    libwebp-dev \
+    libjpeg62-turbo-dev \
+    libmcrypt-dev \
+    libzip-dev \
     zip \
-    unzip
+    git \
+    mariadb-client;
 
-# Install selected extensions and other stuff
-RUN apt-get update \
-    && apt-get -y --no-install-recommends install apt-utils libxml2-dev gnupg apt-transport-https
+# PHP modules
+RUN docker-php-ext-install \
+    pdo_mysql \
+    gd \
+    zip \
+    && a2enmod \
+    rewrite;
 
-# Clear cache
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+#PHP configuration
+RUN echo "file_uploads = On\n" \
+    "memory_limit = 500M\n" \
+    "upload_max_filesize = 500M\n" \
+    "post_max_size = 500M\n" \
+    "max_execution_time = 600\n" \
+    > /usr/local/etc/php/conf.d/uploads.ini
 
-# Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
+# Apache2 configuration
+COPY ./docker-compose/apache2/default.conf /etc/apache2/sites-enabled/000-default.conf
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
