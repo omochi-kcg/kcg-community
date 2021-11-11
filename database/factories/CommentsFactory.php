@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class DiscordServerFactory extends Factory
+class CommentsFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -14,9 +14,7 @@ class DiscordServerFactory extends Factory
     public function definition()
     {
         return [
-            'url' => $this->faker->url(),
-            'name' => $this->faker->word(),
-            'description' => $this->faker->paragraph(),
+            'body' => $this->faker->paragraph()
         ];
     }
 }

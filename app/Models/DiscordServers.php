@@ -18,6 +18,6 @@ class DiscordServers extends Model
 	}
 
     public function tags() {
-		return $this->hasMany(Tags::class);
+		return $this->belongsToMany(Tags::class);
 	}
 }

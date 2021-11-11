@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class BoardFactory extends Factory
+class BoardsFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -14,8 +14,8 @@ class BoardFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->words(5),
-            'decsription' => $this->faker->paragraph()
+            'title' => $this->faker->word(),
+            'description' => $this->faker->paragraph(),
         ];
     }
 }
