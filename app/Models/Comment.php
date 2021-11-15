@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Comments extends Model
+class Comment extends Model
 {
     use HasFactory;
 
@@ -14,6 +14,6 @@ class Comments extends Model
 	}
 
 	public function board() {
-		return $this->belongsTo(Boards::class);
+		return $this->belongsTo(Board::class);
 	}
 }
