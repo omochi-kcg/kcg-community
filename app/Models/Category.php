@@ -4,13 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Tags extends Model
+class Category extends Model
 {
     use HasFactory;
 
     public function discord_servers() {
-		return $this->belongsToMany(DiscordServers::class);
+		return $this->hasMany(DiscordServer::class);
 	}
 }

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Boards extends Model
+class Board extends Model
 {
     use HasFactory;
 
@@ -14,6 +14,6 @@ class Boards extends Model
 	}
 
     public function comments() {
-		return $this->hasMany(Comments::class);
+		return $this->hasMany(Comment::class);
 	}
 }
