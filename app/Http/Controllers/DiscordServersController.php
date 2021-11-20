@@ -18,7 +18,8 @@ class DiscordServersController extends Controller
 
     public function create()
     {
-        return view('discord-servers.create');
+        $categories = Category::all();
+        return view('discord-servers.create', compact('categories'));
     }
 
     public function store(Request $request)
