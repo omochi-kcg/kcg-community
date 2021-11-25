@@ -13,7 +13,7 @@ class DiscordServersController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $tags = Tag::withCount('discord_servers')->orderBY('discord_servers_count', 'desc')->limit(5)->get();
+        $tags = Tag::withCount('discord_servers')->orderBY('discord_servers_count', 'desc')->orderBy('name', 'asc')->limit(5)->get();
         $servers = DiscordServer::all();
         return view('discord-servers.index', compact('categories', 'tags', 'servers'));
     }
