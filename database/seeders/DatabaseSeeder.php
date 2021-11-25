@@ -25,7 +25,9 @@ class DatabaseSeeder extends Seeder
         Tag::factory(25)->create();
 
         //Create some categories.
-        Category::factory(10)->create();
+        foreach(Category::CATEGORIES as $category) {
+            Category::factory()->create(['name' => $category]);
+        }
 
         //Create 10 users
         User::factory(10)->create()->each(function($user){
