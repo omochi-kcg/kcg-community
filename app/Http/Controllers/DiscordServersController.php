@@ -29,7 +29,8 @@ class DiscordServersController extends Controller
     public function edit($id)
     {
         $server = DiscordServer::findOrFail($id);
-        return view('discord-servers.edit', compact('server'));
+        $categories = Category::all();
+        return view('discord-servers.edit', compact('server', 'categories'));
     }
 
     public function update(Request $request, $id)
