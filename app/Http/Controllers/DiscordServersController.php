@@ -6,13 +6,14 @@ use App\Http\Requests\DiscordServersEditRequest;
 use App\Http\Requests\DiscordServersStoreRequest;
 use App\Models\Category;
 use App\Models\DiscordServer;
+use App\Models\Tag;
 
 class DiscordServersController extends Controller
 {
     public function index()
     {
         $categories = Category::all();
-        $tags = Category::limit(5)->get();
+        $tags = Tag::withCount('discord_servers')->orderBY('discord_servers_count', 'desc')->limit(5)->get();
         $servers = DiscordServer::all();
         return view('discord-servers.index', compact('categories', 'tags', 'servers'));
     }
