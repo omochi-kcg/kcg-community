@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\DiscordServersEdit;
 use App\Http\Requests\DiscordServersEditRequest;
 use App\Http\Requests\DiscordServersStoreRequest;
 use App\Models\Category;
 use App\Models\DiscordServer;
-use Illuminate\Http\Request;
 
 class DiscordServersController extends Controller
 {
