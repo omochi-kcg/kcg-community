@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DiscordServersEdit;
+use App\Http\Requests\DiscordServersEditRequest;
+use App\Http\Requests\DiscordServersStoreRequest;
 use App\Models\Category;
 use App\Models\DiscordServer;
 use Illuminate\Http\Request;
@@ -22,7 +25,7 @@ class DiscordServersController extends Controller
         return view('discord-servers.create', compact('categories'));
     }
 
-    public function store(Request $request)
+    public function store(DiscordServersStoreRequest $request)
     {
     }
 
@@ -33,7 +36,7 @@ class DiscordServersController extends Controller
         return view('discord-servers.edit', compact('server', 'categories'));
     }
 
-    public function update(Request $request, $id)
+    public function update(DiscordServersEditRequest $request, $id)
     {
     }
 
