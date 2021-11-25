@@ -19,7 +19,7 @@
                         <li class="inline text-base text-gray-900 xl:block">
                             <a class="items-center inline-block px-3 py-1 mt-3 ml-4 text-base text-white transition duration-500 ease-in-out transform bg-green-500 rounded-lg xl:ml-0 opacity-80 xl:px-4 xl:py-2 xl:text-gray-900 xl:w-full xl:inline-flex focus:shadow-outline hover:bg-green-700 xl:hover:bg-gray-50 xl:bg-white"
                                 href="#">
-                                <span class="xl:ml-10 xl:border-b-2 xl:border-gray-100"># {{ $tag->name }}()</span>
+                                <span class="xl:ml-10 xl:border-b-2 xl:border-gray-100">#{{ $tag->name }}({{ $tag->discord_servers_count }})</span>
                             </a>
                         </li>
                     @endforeach
