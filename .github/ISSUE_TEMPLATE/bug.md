@@ -1,25 +1,31 @@
 ---
-name: バグレポート
-about: Create a report to help us improve
-title: ''
-labels: ''
-assignees: ''
+name: バグ報告
+about: バグ改善のための報告issue
+title: 'bug_〇〇'
+labels: 'bug'
+assignees: 'gonjitti'
 
 ---
 
-**バグを説明してください**
-＜ここから＞
+---
+name: バグ報告
+about: バグ改善のための報告issue
+---
+# Bug report
 
-**どうやって再現するのか**
-1. このエージに入らて '...'
-2. '....'をクリックして
-3. エラーが表示する
+## 今はどんな不具合が出る?
+例: ヘルプのフローティングアイコンが見切れてる
 
-**思ったこと**
-＜ここから＞
+## 不具合の再現方法
+例: スマートフォンからトップページにアクセスする
 
-**Screenshots**
-＜あれば写真＞
+## どう動作すると正しい?
+例: トップページにアクセスするとヘルプのフローティングアイコンが画面の右下に表示される。
 
-**その他**
-＜ここから＞
+## 参考情報
+例: ScreenShotなどあれば
+
+Node.js version: 
+NPM/Yarn version
+Operating System: 
+Additional tools:
