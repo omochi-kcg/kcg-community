@@ -7,9 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    public function discord_servers() {
-		return $this->hasMany(DiscordServer::class);
-	}
+  public function discord_servers()
+  {
+    return $this->hasMany(DiscordServer::class);
+  }
+  const CATEGORIES = [
+    'コミュニティ',
+    '授業',
+    'サークル',
+    'アニメ・マンガ',
+    'ゲーム',
+    'その他'
+  ];
 }
