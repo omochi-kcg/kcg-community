@@ -10,4 +10,8 @@ class HomesController extends Controller
     {
         return view('homes.top');
     }
+    public function about()
+    {
+        return view('homes.about');
+    }
 }
