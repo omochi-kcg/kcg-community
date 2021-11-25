@@ -1,17 +1,31 @@
 ---
-name: フェアシェア
-about: Suggest an idea for this project
-title: ''
-labels: ''
-assignees: ''
+name: 機能要望
+about: 欲しい機能がある場合、こちらを利用してください。
+title: 'enhancement_〇〇'
+labels: 'enhancement'
+assignees: 'gonjitti'
 
 ---
 
-**どんな問題のためこのフェアシェアが必要.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+---
+name: 機能要望
+about: 欲しい機能がある場合、こちらを利用してください。
+---
 
-**フェアシェアを説明して**
-A clear and concise description of what you want to happen.
 
-**その他**
-Add any other context or screenshots about the feature request here.
+## 欲しい機能はなに?
+例. bulmaの解説機能が欲しい
+
+
+## なぜその機能が欲しい?
+例). Bootstrapより簡易的でモダンなCSSフレームワークでファンも増えるはずだが、日本語の解説が少なすぎるため。
+
+
+## 実装方法
+例). gonjitti.comのナビゲーションにbulmaのメニューを追加して解説ページを作成していく。
+
+
+## 参考URL
+
+
+## 参考資料
