@@ -26,52 +26,54 @@
                 </ul>
             </div>
             <div class="p-6 pb-0 bg-white border-b border-gray-200 xl:w-11/12">
+                <form class="relative pt-2 mb-4 text-right text-gray-600">
+                    <input
+                        class="h-10 px-5 pr-16 text-sm bg-white border-2 border-gray-300 rounded-lg focus:outline-none"
+                        type="search" name="search" placeholder="Search">
+                    <button type="submit" class="absolute top-0 right-0 mt-5 mr-4">
+                        <svg class="w-4 h-4 text-gray-600 fill-current" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
+                            viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;"
+                            xml:space="preserve" width="512px" height="512px">
+                            <path
+                                d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+                        </svg>
+                    </button>
+                </form>
+                <div class="my-4 text-right">
+                    <a href="{{ route('discord-servers.create') }}" type="button"
+                        class="inline-flex items-center px-4 py-2 font-bold text-white bg-indigo-500 rounded hover:bg-indigo-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                        </svg>
+                        <span class="mt-1">サーバーを作成</span>
+                    </a>
+                </div>
                 <div class="flex-wrap md:flex">
                     @foreach ($servers as $server)
-                        <div class="flex flex-col items-start p-12 border-2 lg:w-1/2">
+                        <div class="flex flex-col items-start w-full p-12 border-2 lg:w-1/2">
                             {{-- Todo N+1問題 --}}
-                            <span
-                                class="inline-block px-2 py-1 text-xs font-medium tracking-widest text-indigo-500 rounded bg-indigo-50">{{ $server->category->name }}</span>
-                            <p class="mt-4 leading-relaxed">作成者: {{ $server->user->name }}</p>
-                            <h2 class="mt-4 mb-4 text-2xl font-medium text-gray-900 sm:text-3xl title-font">
+                            <h2 class="mb-4 text-2xl font-medium text-gray-900 sm:text-3xl title-font">
                                 {{ $server->name }}</h2>
-                            <p class="mb-8 leading-relaxed">
+                            <span
+                                class="inline-block px-2 py-1 text-sm tracking-widest text-indigo-500 rounded bg-indigo-50">{{ $server->category->name }}</span>
+                            <div class="my-1">
+                                @foreach ($server->tags as $tag)
+                                    <span
+                                        class="inline-block px-2 py-1 text-sm tracking-widest text-green-500 rounded bg-green-50">#{{ $tag->name }}</span>
+                                @endforeach
+                            </div>
+                            <h3 class="my-4 text-lg text-green-900">説明</h3>
+                            <p class="mb-4 leading-relaxed">
                                 {{ $server->description }}
                             </p>
-                            <div
-                                class="flex flex-wrap items-center w-full pb-4 mt-auto mb-4 border-b-2 border-gray-100">
-                                <a class="inline-flex items-center text-indigo-500">Learn More
-                                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor"
-                                        stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M5 12h14"></path>
-                                        <path d="M12 5l7 7-7 7"></path>
-                                    </svg>
+                            <p class="my-2 leading-relaxed">作成者: {{ $server->user->name }}</p>
+                            <div class="pb-2 mx-auto mt-auto mb-2 text-center border-b-2 border-gray-100 ">
+                                <a href="{{ $server->url }}" class="text-xl text-indigo-500">
+                                    サーバーに入る
                                 </a>
-                                <span
-                                    class="inline-flex items-center py-1 pr-3 ml-auto mr-3 text-sm leading-none text-gray-400 border-r-2 border-gray-200">
-                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
-                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                        <circle cx="12" cy="12" r="3"></circle>
-                                    </svg>1.2K
-                                </span>
-                                <span class="inline-flex items-center text-sm leading-none text-gray-400">
-                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
-                                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                                        <path
-                                            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
-                                        </path>
-                                    </svg>6
-                                </span>
                             </div>
-                            <a class="inline-flex items-center">
-                                <img alt="blog" src="https://dummyimage.com/104x104"
-                                    class="flex-shrink-0 object-cover object-center w-12 h-12 rounded-full">
-                                <span class="flex flex-col flex-grow pl-4">
-                                    <span class="font-medium text-gray-900 title-font">Holden Caulfield</span>
-                                    <span class="text-gray-400 text-xs tracking-widest mt-0.5">UI DEVELOPER</span>
-                                </span>
-                            </a>
                         </div>
                     @endforeach
 
