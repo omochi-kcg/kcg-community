@@ -14,7 +14,9 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     zip \
     git \
-    mariadb-client;
+    mariadb-client \
+    nodejs \
+    npm;
 
 # PHP modules
 RUN docker-php-ext-install \
