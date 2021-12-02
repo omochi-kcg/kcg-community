@@ -9,6 +9,11 @@ use App\Models\DiscordServer;
 
 class DiscordServersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index']);
+    }
+
     public function index()
     {
         $categories = Category::all();
