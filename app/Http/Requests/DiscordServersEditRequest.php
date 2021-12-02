@@ -24,10 +24,9 @@ class DiscordServersEditRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => ['required', 'integer', 'exists:users'],
             'name' => ['required', 'string', 'unique:discord_servers', 'max:255'],
             'url' => ['required', 'url', 'max:255'],
-            'category_id' => ['required', 'integer', 'exists:categories'],
+            'category_id' => ['required', 'integer', 'exists:categories,id'],
             'tags.*' => ['string', 'max:255'],
             'description' => ['required', 'string', 'max:65,535'],
         ];
