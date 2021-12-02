@@ -45,13 +45,12 @@ class DiscordServersController extends Controller
                     'description' => $request->description,
                 ]);
                 $tagIds = [];
-                foreach ($request->tags as $tagName) {
-                    $tag = Tag::where('name', $tagName)->first();
-                    if (empty($tag)) {
-                        $tag = Tag::create([
-                            'name' => $tagName
-                        ]);
-                    }
+                // 空白と重複を除去
+                $tagNames = array_unique(array_filter($request->tags));
+                foreach ($tagNames as $tagName) {
+                    $tag = Tag::where('name', $tagName)->firstOrCreate([
+                        'name' => $tagName
+                    ]);
                     $tagIds[] = $tag->id;
                 }
                 $server->tags()->attach($tagIds);
