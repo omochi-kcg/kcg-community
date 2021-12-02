@@ -10,7 +10,14 @@ class Tag extends Model
 {
     use HasFactory;
 
-    public function discord_servers() {
-		return $this->belongsToMany(DiscordServer::class);
-	}
+    protected $fillable = [
+        'name',
+        'discord_server_id',
+        'tag_id',
+    ];
+
+    public function discord_servers()
+    {
+        return $this->belongsToMany(DiscordServer::class);
+    }
 }
