@@ -23,9 +23,14 @@
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     @if (Auth::check())
-                        <x-nav-link :href="route('logout')" :active="request()->routeIs('logout')">
-                            Logout
-                        </x-nav-link>
+                        <form action="{{ route('logout') }}" method="POST"
+                            class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            @csrf
+                            <x-nav-link :href="route('logout')" onclick="event.preventDefault();
+                        this.closest('form').submit();">
+                                Logout
+                            </x-nav-link>
+                        </form>
                     @else
                         <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
                             Login
@@ -61,9 +66,20 @@
                 <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                     授業評価
                 </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('login')" :active="request()->routeIs('login')">
-                    Login
-                </x-responsive-nav-link>
+                @if (Auth::check())
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+
+                        <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                            Logout
+                        </x-responsive-nav-link>
+                    </form>
+                @else
+                    <x-responsive-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                        Login
+                    </x-responsive-nav-link>
+                @endif
             </div>
         </div>
 </nav>
