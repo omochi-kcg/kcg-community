@@ -9,8 +9,6 @@ Route::get('/', [HomesController::class, 'top'])
 
 Route::resource('discord-servers', DiscordServersController::class)
     ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
-Route::get('/about', [HomesController::class, 'about'])
-    ->name('homes.about');    
 
 Route::get('/dashboard', function () {
     return view('dashboard');
