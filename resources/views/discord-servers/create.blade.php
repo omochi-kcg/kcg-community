@@ -4,20 +4,29 @@
             <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <h1 class="text-xl text-center">サーバー登録</h1>
+
                     <form action="{{ route('discord-servers.store') }}" method="post"
                         class="grid grid-cols-1 gap-6 mt-16 md:mx-16 lg:mx-24 xl:mx-28">
                         @csrf
+                        @if (count($errors) > 0)
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li class="text-red-500">{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        @endif
                         <label class="block">
                             <span class="text-gray-700">サーバー名</span>
                             <input name="name" type="text" value="{{ old('name') }}"
-                                class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                required>
                         </label>
                         <label class="block">
                             <span class="text-gray-700">招待URL ※無期限URLにしてください。</span>
                             <label class="block">
                                 <input name="url" type="url" value="{{ old('url') }}"
                                     class="block w-full my-1 placeholder-gray-300 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                    placeholder="https://discord.gg/U96wKuret">
+                                    placeholder="https://discord.gg/U96wKuret" required>
                             </label>
                             <a href="#" target="_blank" class="text-indigo-500 hover:text-indigo-600">期限なしURL取得方法</a>
                             <label class="block mt-2">
@@ -46,7 +55,7 @@
                                 <span class="text-gray-700">説明</span>
                                 <textarea name="description"
                                     class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                    rows="10"></textarea>
+                                    rows="10" required></textarea>
                             </label>
                             <div class="mt-4 text-right">
                                 <button
