@@ -22,9 +22,6 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('homes.about')" :active="request()->routeIs('homes.about')">
-                        About
-                    </x-nav-link>
                     @if (Auth::check())
                         <x-nav-link :href="route('logout')" :active="request()->routeIs('logout')">
                             Logout
@@ -63,9 +60,6 @@
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                     授業評価
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('homes.about')" :active="request()->routeIs('homes.about')">
-                    About
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('login')" :active="request()->routeIs('login')">
                     Login
