@@ -19,7 +19,8 @@
                         <li class="inline text-base text-gray-900 xl:block">
                             <a class="items-center inline-block px-3 py-1 mt-3 ml-4 text-base text-white transition duration-500 ease-in-out transform bg-green-500 rounded-lg xl:ml-0 opacity-80 xl:px-4 xl:py-2 xl:text-gray-900 xl:w-full xl:inline-flex focus:shadow-outline hover:bg-green-700 xl:hover:bg-gray-50 xl:bg-white"
                                 href="#">
-                                <span class="xl:ml-10 xl:border-b-2 xl:border-gray-100">#{{ $tag->name }}({{ $tag->discord_servers_count }})</span>
+                                <span
+                                    class="xl:ml-10 xl:border-b-2 xl:border-gray-100">#{{ $tag->name }}({{ $tag->discord_servers_count }})</span>
                             </a>
                         </li>
                     @endforeach
@@ -74,9 +75,20 @@
                                     サーバーに入る
                                 </a>
                             </div>
+                            @if (Auth::id() === $server->user_id)
+                                <div class="flex justify-end w-full space-x-2">
+                                    <a href="{{ route('discord-servers.edit', $server->id) }}"
+                                        class="px-2 py-1 text-base font-semibold text-center text-white transition duration-200 ease-in bg-green-500 shadow-md md:px-4 md:py-2 hover:bg-green-600 focus:ring-green-400 focus:ring-offset-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2">編集</a>
+                                    <form action="{{ route('discord-servers.destroy', $server->id) }}" method="post">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button
+                                            class="px-2 py-1 text-base font-semibold text-center text-white transition duration-200 ease-in bg-red-500 shadow-md md:px-4 md:py-2 hover:bg-red-600 focus:ring-red-400 focus:ring-offset-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2">削除</button>
+                                    </form>
+                                </div>
+                            @endif
                         </div>
                     @endforeach
-
                 </div>
             </div>
         </div>
