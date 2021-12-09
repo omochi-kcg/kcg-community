@@ -21,7 +21,7 @@
                                 class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                 required>
                         </label>
-                        <label class="block">
+                        <div>
                             <span class="text-gray-700">招待URL ※無期限URLにしてください。</span>
                             <label class="block">
                                 <input name="url" type="url" value="{{ old('url') }}"
@@ -34,12 +34,19 @@
                                 <select name="category_id"
                                     class="block w-full mt-1 text-gray-700 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                     @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        <option {{ (int) old('category_id') === $category->id ? 'selected' : '' }}
+                                            value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
                                 </select>
                             </label>
                             <label class="block mt-2 text-gray-700" id="tag">
                                 <span>#タグ</span>
+                                @if (!is_null(old('tags')))
+                                    @foreach (array_unique(array_filter(old('tags'))) as $tagName)
+                                    <input type="text" name="tags[]" value="{{ $tagName }}"
+                                        class="block w-2/3 my-1 placeholder-gray-300 border-gray-300 rounded-md shadow-sm md:w-1/2 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                @endforeach
+                                @endif
                             </label>
                             <button type="button" id="add-button"
                                 class="px-3 py-2 font-bold text-gray-500 border-2 rounded shadow-sm bg-gray-50 hover:text-gray-600 hover:bg-white">
@@ -51,6 +58,7 @@
                                 </svg>
                                 <span>タグを追加</span>
                             </button>
+
                             <label class="block my-2">
                                 <span class="text-gray-700">説明</span>
                                 <textarea name="description"
@@ -62,10 +70,11 @@
                                     class="px-8 py-2 text-lg font-bold text-white bg-indigo-500 border-0 rounded focus:outline-none hover:bg-indigo-600">
                                     作成</button>
                             </div>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    <script src="{{ asset('js/discord-servers/create.js') }}"></script>
+    <script src="{{ asset('js/discord-servers/tags.js') }}"></script>
 </x-app-layout>
