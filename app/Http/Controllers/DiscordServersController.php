@@ -80,6 +80,33 @@ class DiscordServersController extends Controller
 
     public function update(DiscordServersEditRequest $request, $id)
     {
+        try {
+            DB::transaction(function () use ($request, $id) {
+                $server = DiscordServer::findOrFail($id);
+                $server->category_id = $request->category_id;
+                $server->url = $request->url;
+                $server->name = $request->name;
+                $server->description = $request->description;
+                $server->save();
+
+                $tagIds = [];
+                // 空白と重複を除去
+                $tagNames = array_unique(array_filter($request->tags));
+                foreach ($tagNames as $tagName) {
+                    $tag = Tag::where('name', $tagName)->firstOrCreate([
+                        'name' => $tagName
+                    ]);
+                    $tagIds[] = $tag->id;
+                }
+                $server->tags()->attach($tagIds);
+            });
+        } catch (Throwable $e) {
+            Log::error($e);
+            throw $e;
+        }
+
+        return redirect()
+            ->route('discord-servers.index');
     }
 
     public function destroy($id)
