@@ -17,6 +17,13 @@ class DiscordServersController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except(['index']);
+        $this->middleware(function ($request, $next) {
+            $server = DiscordServer::findOrFail($request->route('discord_server'));
+            if (Auth::id() !== $server->user_id) {
+                abort(404);
+            }
+            return $next($request);
+        })->only(['edit', 'update', 'destroy']);
     }
 
     public function index()
