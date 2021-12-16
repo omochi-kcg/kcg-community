@@ -8,7 +8,7 @@
                     @foreach ($categories as $category)
                         <li class="inline xl:block">
                             <a class="items-center inline-block px-3 py-1 mt-3 ml-4 text-base text-white transition duration-500 ease-in-out transform bg-gray-400 rounded-lg xl:ml-0 xl:px-4 xl:py-2 xl:text-gray-900 xl:w-full xl:inline-flex focus:shadow-outline hover:bg-gray-700 xl:hover:bg-gray-50 xl:bg-white"
-                                href="#">
+                                href="?category={{ $category->id }}">
                                 <span class="xl:border-b-2 xl:border-gray-100 xl:ml-10">{{ $category->name }}</span>
                             </a>
                         </li>
@@ -19,7 +19,7 @@
                     @foreach ($tags as $tag)
                         <li class="inline text-base text-gray-900 xl:block">
                             <a class="items-center inline-block px-3 py-1 mt-3 ml-4 text-base text-white transition duration-500 ease-in-out transform bg-green-500 rounded-lg xl:ml-0 opacity-80 xl:px-4 xl:py-2 xl:text-gray-900 xl:w-full xl:inline-flex focus:shadow-outline hover:bg-green-700 xl:hover:bg-gray-50 xl:bg-white"
-                                href="#">
+                                href="?tag={{ $tag->id }}">
                                 <span
                                     class="xl:ml-10 xl:border-b-2 xl:border-gray-100">#{{ $tag->name }}({{ $tag->discord_servers_count }})</span>
                             </a>
@@ -59,11 +59,11 @@
                             <h2 class="mb-4 text-2xl font-medium text-gray-900 sm:text-3xl title-font">
                                 {{ $server->name }}</h2>
                             <span
-                                class="inline-block px-2 py-1 text-sm tracking-widest text-indigo-500 rounded bg-indigo-50">{{ $server->category->name }}</span>
+                                class="inline-block px-2 py-1 text-sm tracking-widest text-indigo-500 rounded bg-indigo-50"><a href="?category={{ $server->category_id }}">{{ $server->category->name }}</a></span>
                             <div class="my-1">
                                 @foreach ($server->tags as $tag)
                                     <span
-                                        class="inline-block px-2 py-1 text-sm tracking-widest text-green-500 rounded bg-green-50">#{{ $tag->name }}</span>
+                                        class="inline-block px-2 py-1 text-sm tracking-widest text-green-500 rounded bg-green-50"><a href="?tag={{ $tag->id }}">#{{ $tag->name }}</a></span>
                                 @endforeach
                             </div>
                             <h3 class="my-4 text-lg text-green-900">説明</h3>
