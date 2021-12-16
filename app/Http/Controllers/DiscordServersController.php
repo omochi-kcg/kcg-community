@@ -7,6 +7,7 @@ use App\Http\Requests\DiscordServersStoreRequest;
 use App\Models\Category;
 use App\Models\DiscordServer;
 use App\Models\Tag;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -26,11 +27,21 @@ class DiscordServersController extends Controller
         })->only(['edit', 'update', 'destroy']);
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $categories = Category::all();
-        $tags = Tag::withCount('discord_servers')->orderBY('discord_servers_count', 'desc')->orderBy('name', 'asc')->limit(5)->get();
         $servers = DiscordServer::all();
+        $tags = Tag::withCount('discord_servers')->orderBY('discord_servers_count', 'desc')->orderBy('name', 'asc')->limit(5)->get();
+
+        if($request->has('category')) {
+            $servers = $servers->where('category_id', $request->category);
+        }
+        if($request->has('tag')) {
+            $servers = DiscordServer::whereHas('tags', function ($q) use ($request) {
+                $q->where('tags.id', $request->tag);
+            })->get();
+        }
+
         return view('discord-servers.index', compact('categories', 'tags', 'servers'));
     }
 
