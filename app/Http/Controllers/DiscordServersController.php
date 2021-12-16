@@ -68,7 +68,11 @@ class DiscordServersController extends Controller
         }
 
         return redirect()
-            ->route('discord-servers.index');
+            ->route('discord-servers.index')
+            ->with([
+                'message' => 'サーバーを作成しました。',
+                'status' => 'success',
+            ]);
     }
 
     public function edit($id)
@@ -106,10 +110,15 @@ class DiscordServersController extends Controller
         }
 
         return redirect()
-            ->route('discord-servers.index');
+            ->route('discord-servers.index')
+            ->with([
+                'message' => 'サーバーを更新しました。',
+                'status' => 'success',
+            ]);;
     }
 
     public function destroy($id)
     {
+        // TODO statusはalertでフラッシュメッセージ
     }
 }

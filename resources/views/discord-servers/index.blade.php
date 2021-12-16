@@ -1,5 +1,6 @@
 <x-app-layout>
     <div class="pt-12">
+        <x-flash-message />
         <div class="px-4 mt-5 xl:flex 2xl:px-16">
             <div class="p-12 bg-white border-r-4 xl:p-0 xl:w-2/12 border-gray-50 ">
                 <h3 class="p-2 pt-6 text-xl text-gray-900"><span class="xl:ml-10">カテゴリ</span></h3>
