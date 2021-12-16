@@ -98,7 +98,7 @@ class DiscordServersController extends Controller
                     ]);
                     $tagIds[] = $tag->id;
                 }
-                $server->tags()->attach($tagIds);
+                $server->tags()->sync($tagIds);
             });
         } catch (Throwable $e) {
             Log::error($e);
