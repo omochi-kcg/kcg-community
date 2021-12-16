@@ -29,7 +29,6 @@ class DiscordServersController extends Controller
 
     public function index(Request $request)
     {
-        DiscordServer::query();
         $categories = Category::all();
         $servers = DiscordServer::query();
         $tags = Tag::withCount('discord_servers')->orderBY('discord_servers_count', 'desc')->orderBy('name', 'asc')->limit(5)->get();
