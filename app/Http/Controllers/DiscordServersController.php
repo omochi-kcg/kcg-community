@@ -46,6 +46,9 @@ class DiscordServersController extends Controller
             $servers = $servers->where(function($q) use ($request){
                 $q->where('name', 'like', '%' . $request->search . '%')
                     ->orWhere('description', 'like', '%' . $request->search . '%')
+                    ->orWhereHas('user', function ($q) use ($request) {
+                        $q->where('name', 'like', '%' . $request->search . '%');
+                    })
                     ->orWhereHas('category', function ($q) use ($request) {
                         $q->where('name', 'like', '%' . $request->search . '%');
                     })
