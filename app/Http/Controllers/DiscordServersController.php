@@ -123,13 +123,11 @@ class DiscordServersController extends Controller
             DB::transaction(function () use ($id) {
                 $server = DiscordServer::findOrFail($id);
                 foreach ($server->tags as $serverTag) {
-                    $tags = Tag::where('id', $serverTag->id)->withCount('discord_servers');
-                    if ($tags->value('discord_servers_count') === 1) {
-                        $server->tags()->detach($serverTag->id);
+                    $server->tags()->detach($serverTag->id);
+                    if (Tag::where('id', $serverTag->id)->withCount('discord_servers')->value('discord_servers_count') === 0) {
                         $serverTag->delete();
                     }
                 }
-                $server->tags()->detach();
                 $server->delete();
             });
         } catch (Throwable $e) {
