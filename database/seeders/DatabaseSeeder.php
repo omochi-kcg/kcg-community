@@ -22,7 +22,6 @@ class DatabaseSeeder extends Seeder
     {
 
         //Create some tags.
-        //Tag::factory(25)->create();
         foreach (Tag::TAGS as $tag) {
             Tag::factory()->create(['name' => $tag]);
         }
