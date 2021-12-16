@@ -10,6 +10,14 @@ class Tag extends Model
 {
     use HasFactory;
 
+    const TAGS = [
+        '雑談',
+        '作業',
+        '通話',
+        '初心者歓迎',
+        'まったり'
+    ];
+
     protected $fillable = [
         'name',
         'discord_server_id',
