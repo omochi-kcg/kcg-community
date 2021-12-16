@@ -18,13 +18,7 @@ class DiscordServersController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except(['index']);
-        $this->middleware(function ($request, $next) {
-            $server = DiscordServer::findOrFail($request->route('discord_server'));
-            if (Auth::id() !== $server->user_id) {
-                abort(404);
-            }
-            return $next($request);
-        })->only(['edit', 'update', 'destroy']);
+        $this->middleware('owner:discord_server')->only(['edit', 'update', 'destroy']);
     }
 
     public function index(Request $request)
@@ -102,18 +96,16 @@ class DiscordServersController extends Controller
             ]);
     }
 
-    public function edit($id)
+    public function edit(DiscordServer $server)
     {
-        $server = DiscordServer::findOrFail($id);
         $categories = Category::all();
         return view('discord-servers.edit', compact('server', 'categories'));
     }
 
-    public function update(DiscordServersEditRequest $request, $id)
+    public function update(DiscordServersEditRequest $request, DiscordServer $server)
     {
         try {
-            DB::transaction(function () use ($request, $id) {
-                $server = DiscordServer::findOrFail($id);
+            DB::transaction(function () use ($request, $server) {
                 $server->category_id = $request->category_id;
                 $server->url = $request->url;
                 $server->name = $request->name;
