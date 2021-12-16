@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class DiscordServersEditRequest extends FormRequest
 {
@@ -25,7 +26,7 @@ class DiscordServersEditRequest extends FormRequest
     {
         return [
             'name' => ['required', 'max:25'],
-            'url' => ['required', 'url', 'unique:discord_servers', 'max:50'],
+            'url' => ['required', 'url', Rule::unique('discord_servers')->ignore($this->discord_server), 'max:50'],
             'category_id' => ['required', 'integer', 'exists:categories,id'],
             'tags' => ['nullable', 'array', 'max:4'],
             'tags.*' => ['nullable', 'string', 'max:25'],
