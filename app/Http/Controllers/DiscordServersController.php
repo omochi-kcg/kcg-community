@@ -29,19 +29,33 @@ class DiscordServersController extends Controller
 
     public function index(Request $request)
     {
+        DiscordServer::query();
         $categories = Category::all();
-        $servers = DiscordServer::all();
+        $servers = DiscordServer::query();
         $tags = Tag::withCount('discord_servers')->orderBY('discord_servers_count', 'desc')->orderBy('name', 'asc')->limit(5)->get();
 
         if($request->has('category')) {
             $servers = $servers->where('category_id', $request->category);
         }
         if($request->has('tag')) {
-            $servers = DiscordServer::whereHas('tags', function ($q) use ($request) {
+            $servers = $servers->whereHas('tags', function ($q) use ($request) {
                 $q->where('tags.id', $request->tag);
-            })->get();
+            });
+        }
+        if($request->has('search')) {
+            $servers = $servers->where(function($q) use ($request){
+                $q->where('name', 'like', '%' . $request->search . '%')
+                    ->orWhere('description', 'like', '%' . $request->search . '%')
+                    ->orWhereHas('category', function ($q) use ($request) {
+                        $q->where('name', 'like', '%' . $request->search . '%');
+                    })
+                    ->orWhereHas('tags', function ($q) use ($request) {
+                        $q->where('name', 'like', '%' . $request->search . '%');
+                    });
+            });
         }
 
+        $servers = $servers->get();
         return view('discord-servers.index', compact('categories', 'tags', 'servers'));
     }
 
