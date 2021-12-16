@@ -138,6 +138,27 @@ class DiscordServersController extends Controller
 
     public function destroy($id)
     {
-        // TODO statusはalertでフラッシュメッセージ
+        try {
+            DB::transaction(function () use ($id) {
+                $server = DiscordServer::findOrFail($id);
+                foreach ($server->tags as $serverTag) {
+                    $server->tags()->detach($serverTag->id);
+                    if (Tag::where('id', $serverTag->id)->withCount('discord_servers')->value('discord_servers_count') === 0) {
+                        $serverTag->delete();
+                    }
+                }
+                $server->delete();
+            });
+        } catch (Throwable $e) {
+            Log::error($e);
+            throw $e;
+        }
+
+        return redirect()
+            ->route('discord-servers.index')
+            ->with([
+                'message' => 'サーバーを削除しました。',
+                'status' => 'alert',
+            ]);
     }
 }

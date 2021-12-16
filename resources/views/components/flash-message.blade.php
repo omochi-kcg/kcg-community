@@ -7,7 +7,7 @@ if (session('status') === 'success') {
 @endphp
 
 @if (session('message'))
-    <div class="{{ $bgColor }} border-l-4 p-4" role="alert">
+    <div class="{{ $bgColor }} border-l-4 p-4 -mt-12" role="alert">
         <p>
             {{ session('message') }}
         </p>
