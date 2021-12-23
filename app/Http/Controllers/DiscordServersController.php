@@ -27,16 +27,16 @@ class DiscordServersController extends Controller
         $servers = DiscordServer::query();
         $tags = Tag::withCount('discord_servers')->orderBY('discord_servers_count', 'desc')->orderBy('name', 'asc')->limit(5)->get();
 
-        if($request->has('category')) {
+        if ($request->has('category')) {
             $servers = $servers->where('category_id', $request->category);
         }
-        if($request->has('tag')) {
+        if ($request->has('tag')) {
             $servers = $servers->whereHas('tags', function ($q) use ($request) {
                 $q->where('tags.id', $request->tag);
             });
         }
-        if($request->has('search')) {
-            $servers = $servers->where(function($q) use ($request){
+        if ($request->has('search')) {
+            $servers = $servers->where(function ($q) use ($request) {
                 $q->where('name', 'like', '%' . $request->search . '%')
                     ->orWhere('description', 'like', '%' . $request->search . '%')
                     ->orWhereHas('user', function ($q) use ($request) {
@@ -74,14 +74,16 @@ class DiscordServersController extends Controller
                 ]);
                 $tagIds = [];
                 // 空白と重複を除去
-                $tagNames = array_unique(array_filter($request->tags));
-                foreach ($tagNames as $tagName) {
-                    $tag = Tag::where('name', $tagName)->firstOrCreate([
-                        'name' => $tagName
-                    ]);
-                    $tagIds[] = $tag->id;
+                if (is_null($request->tags)) {
+                    $tagNames = array_unique(array_filter($request->tags));
+                    foreach ($tagNames as $tagName) {
+                        $tag = Tag::where('name', $tagName)->firstOrCreate([
+                            'name' => $tagName
+                        ]);
+                        $tagIds[] = $tag->id;
+                    }
+                    $server->tags()->attach($tagIds);
                 }
-                $server->tags()->attach($tagIds);
             });
         } catch (Throwable $e) {
             Log::error($e);
