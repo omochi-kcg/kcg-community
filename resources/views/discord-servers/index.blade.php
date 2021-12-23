@@ -70,7 +70,7 @@
                             </div>
                             <h3 class="my-4 text-lg text-green-900">説明</h3>
                             <p class="mb-4 leading-relaxed">
-                                {{ $server->description }}
+                                {!! nl2br(e($server->description)) !!}
                             </p>
                             <p class="my-2 leading-relaxed">作成者: {{ $server->user->name }}</p>
                             <div class="pb-2 mx-auto mt-auto mb-2 text-center border-b-2 border-gray-100 ">
