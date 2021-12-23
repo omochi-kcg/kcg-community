@@ -29,7 +29,7 @@ class DiscordServersStoreRequest extends FormRequest
             'category_id' => ['required', 'integer', 'exists:categories,id'],
             'tags' => ['nullable', 'array', 'max:4'],
             'tags.*' => ['nullable', 'string', 'max:25'],
-            'description' => ['required', 'string', 'max:65,535'],
+            'description' => ['required', 'string', 'max:500'],
         ];
     }
 }
