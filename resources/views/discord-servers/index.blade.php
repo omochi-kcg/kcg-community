@@ -59,11 +59,13 @@
                             <h2 class="mb-4 text-2xl font-medium text-gray-900 sm:text-3xl title-font">
                                 {{ $server->name }}</h2>
                             <span
-                                class="inline-block px-2 py-1 text-sm tracking-widest text-indigo-500 rounded bg-indigo-50"><a href="?category={{ $server->category_id }}">{{ $server->category->name }}</a></span>
+                                class="inline-block px-2 py-1 text-sm tracking-widest text-indigo-500 rounded bg-indigo-50"><a
+                                    href="?category={{ $server->category_id }}">{{ $server->category->name }}</a></span>
                             <div class="my-1">
                                 @foreach ($server->tags as $tag)
                                     <span
-                                        class="inline-block px-2 py-1 text-sm tracking-widest text-green-500 rounded bg-green-50"><a href="?tag={{ $tag->id }}">#{{ $tag->name }}</a></span>
+                                        class="inline-block px-2 py-1 text-sm tracking-widest text-green-500 rounded bg-green-50"><a
+                                            href="?tag={{ $tag->id }}">#{{ $tag->name }}</a></span>
                                 @endforeach
                             </div>
                             <h3 class="my-4 text-lg text-green-900">説明</h3>
@@ -72,7 +74,8 @@
                             </p>
                             <p class="my-2 leading-relaxed">作成者: {{ $server->user->name }}</p>
                             <div class="pb-2 mx-auto mt-auto mb-2 text-center border-b-2 border-gray-100 ">
-                                <a href="{{ $server->url }}" class="text-xl text-indigo-500">
+                                <a href="{{ Auth::check() ? $server->url : route('login') }}"
+                                    class="text-xl text-indigo-500">
                                     サーバーに入る
                                 </a>
                             </div>
