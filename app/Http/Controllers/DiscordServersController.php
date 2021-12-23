@@ -74,7 +74,7 @@ class DiscordServersController extends Controller
                 ]);
                 $tagIds = [];
                 // 空白と重複を除去
-                if (is_null($request->tags)) {
+                if (!is_null($request->tags)) {
                     $tagNames = array_unique(array_filter($request->tags));
                     foreach ($tagNames as $tagName) {
                         $tag = Tag::where('name', $tagName)->firstOrCreate([
@@ -138,15 +138,16 @@ class DiscordServersController extends Controller
             ]);;
     }
 
-    public function destroy($id)
+    public function destroy(DiscordServer $server)
     {
         try {
-            DB::transaction(function () use ($id) {
-                $server = DiscordServer::findOrFail($id);
-                foreach ($server->tags as $serverTag) {
-                    $server->tags()->detach($serverTag->id);
-                    if (Tag::where('id', $serverTag->id)->withCount('discord_servers')->value('discord_servers_count') === 0) {
-                        $serverTag->delete();
+            DB::transaction(function () use ($server) {
+                if (!is_null($server->tags)) {
+                    foreach ($server->tags as $serverTag) {
+                        $server->tags()->detach($serverTag->id);
+                        if (Tag::where('id', $serverTag->id)->withCount('discord_servers')->value('discord_servers_count') === 0) {
+                            $serverTag->delete();
+                        }
                     }
                 }
                 $server->delete();
