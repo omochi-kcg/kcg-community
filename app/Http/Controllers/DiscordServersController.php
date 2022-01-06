@@ -51,7 +51,7 @@ class DiscordServersController extends Controller
             });
         }
 
-        $servers = $servers->get();
+        $servers = $servers->paginate(20);
         return view('discord-servers.index', compact('categories', 'tags', 'servers'));
     }
 
