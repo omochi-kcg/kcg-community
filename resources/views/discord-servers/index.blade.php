@@ -3,7 +3,7 @@
         <x-flash-message />
         <div class="px-4 mt-5 xl:flex 2xl:px-16">
             <div class="p-12 bg-white border-r-4 xl:p-0 xl:w-2/12 border-gray-50 ">
-                <h3 class="p-2 pt-6 text-xl text-gray-900"><span class="xl:ml-10">カテゴリ</span></h3>
+                <h3 class="p-2 pt-6 text-xl font-semibold text-gray-900"><span class="xl:ml-10">カテゴリ</span></h3>
                 <ul>
                     @foreach ($categories as $category)
                         <li class="inline xl:block">
@@ -14,7 +14,7 @@
                         </li>
                     @endforeach
                 </ul>
-                <h3 class="p-2 pt-6 text-xl text-gray-900"><span class="xl:ml-10">人気タグ</span></h3>
+                <h3 class="p-2 pt-6 text-xl font-semibold text-gray-900"><span class="xl:ml-10">人気タグ</span></h3>
                 <ul>
                     @foreach ($tags as $tag)
                         <li class="inline text-base text-gray-900 xl:block">
@@ -44,19 +44,20 @@
                 </form>
                 <div class="my-4 text-right">
                     <a href="{{ route('discord-servers.create') }}" type="button"
-                        class="inline-flex items-center px-4 py-2 font-bold text-white bg-indigo-500 rounded hover:bg-indigo-600">
+                        class="inline-flex items-center px-4 py-2 font-bold text-white bg-indigo-500 rounded hover:bg-indigo-600 ">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                         </svg>
-                        <span class="mt-1">サーバーを作成</span>
+                        <span class="mt-1 font-semibold">サーバーを作成</span>
                     </a>
                 </div>
-                <div class="flex-wrap md:flex">
+                <div class="gap-6 space-y-2 md:grid md:grid-cols-2 xl:grid-cols-3">
                     @foreach ($servers as $server)
-                        <div class="flex flex-col items-start w-full p-12 border-2 lg:w-1/2">
+                        <div
+                            class="flex flex-col items-start w-full p-6 mt-2 border-2 shadow rounded-2xl md:p-8 xl:p-6 lg:p-8 ">
                             {{-- Todo N+1問題 --}}
-                            <h2 class="mb-4 text-2xl font-medium text-gray-900 sm:text-3xl title-font">
+                            <h2 class="mb-4 text-2xl font-bold text-gray-900 sm:text-3xl title-font">
                                 {{ $server->name }}</h2>
                             <span
                                 class="inline-block px-2 py-1 text-sm tracking-widest text-indigo-500 rounded bg-indigo-50"><a
@@ -68,14 +69,14 @@
                                             href="?tag={{ $tag->id }}">#{{ $tag->name }}</a></span>
                                 @endforeach
                             </div>
-                            <h3 class="my-4 text-lg text-green-900">説明</h3>
+                            <h3 class="my-4 text-lg font-semibold text-green-900">説明</h3>
                             <p class="mb-4 leading-relaxed">
                                 {!! nl2br(e($server->description)) !!}
                             </p>
-                            <p class="my-2 leading-relaxed">作成者: {{ $server->user->name }}</p>
+                            <p class="my-2 font-semibold leading-relaxed">作成者: {{ $server->user->name }}</p>
                             <div class="pb-2 mx-auto mt-auto mb-2 text-center border-b-2 border-gray-100 ">
                                 <a href="{{ Auth::check() ? $server->url : route('login') }}"
-                                    class="text-xl text-indigo-500">
+                                    class="text-xl font-medium text-indigo-500 hover:text-indigo-700">
                                     サーバーに入る
                                 </a>
                             </div>
