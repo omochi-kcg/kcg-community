@@ -27,7 +27,7 @@
                     @endforeach
                 </ul>
             </div>
-            <div class="p-6 pb-0 bg-white border-b border-gray-200 xl:w-11/12">
+            <div class="p-6 bg-white border-b border-gray-200 xl:w-11/12">
                 <form class="relative pt-2 mb-4 text-right text-gray-600">
                     <input
                         class="h-10 px-5 pr-16 text-sm bg-white border-2 border-gray-300 rounded-lg focus:outline-none"
@@ -95,6 +95,14 @@
                             @endif
                         </div>
                     @endforeach
+                </div>
+                <div class="mt-6">
+                    {{ $servers->appends([
+                            'search' => \Request::get('search'),
+                            'category' => \Request::get('category'),
+                            'tag' => \Request::get('tag'),
+                            'pagination' => \Request::get('pagination'),
+                        ])->links() }}
                 </div>
             </div>
         </div>
