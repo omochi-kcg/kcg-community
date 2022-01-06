@@ -83,7 +83,8 @@
                                 <div class="flex justify-end w-full space-x-2">
                                     <a href="{{ route('discord-servers.edit', $server->id) }}"
                                         class="px-2 py-1 text-base font-semibold text-center text-white transition duration-200 ease-in bg-green-500 shadow-md md:px-4 md:py-2 hover:bg-green-600 focus:ring-green-400 focus:ring-offset-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2">編集</a>
-                                    <form action="{{ route('discord-servers.destroy', $server->id) }}" method="post">
+                                    <form action="{{ route('discord-servers.destroy', $server->id) }}" method="post"
+                                        class="delete">
                                         @method('DELETE')
                                         @csrf
                                         <button
@@ -96,4 +97,5 @@
                 </div>
             </div>
         </div>
+        <script src="{{ asset('js/discord-servers/index.js') }}"></script>
 </x-app-layout>

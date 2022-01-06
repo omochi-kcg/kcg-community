@@ -161,7 +161,7 @@ class DiscordServersController extends Controller
             ->route('discord-servers.index')
             ->with([
                 'message' => 'サーバーを削除しました。',
-                'status' => 'alert',
+                'status' => 'success',
             ]);
     }
 }
