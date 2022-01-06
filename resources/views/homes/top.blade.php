@@ -3,11 +3,11 @@
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <div class="h-64 overflow-hidden rounded-lg">
+                    <div class="h-72 overflow-hidden rounded-lg">
                         <img alt="content" class="object-cover object-center w-full h-full" src="{{ asset('images/school_building_ekimae.png') }}">
                     </div>
                     <section class="text-gray-600 body-font">
-                        <div class="container px-5 py-24 mx-auto">
+                        <div class="container px-5 py-20 mx-auto">
                             <div class="flex flex-col w-full mb-20 text-center">
                                 <h2 class="mb-4 text-2xl font-medium text-gray-900 sm:text-3xl title-font">Contents</h2>
                             </div>
