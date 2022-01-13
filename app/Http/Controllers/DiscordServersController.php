@@ -164,4 +164,9 @@ class DiscordServersController extends Controller
                 'status' => 'alert',
             ]);
     }
+
+    public function about()
+    {
+        return view('discord-servers.about');
+    }
 }
