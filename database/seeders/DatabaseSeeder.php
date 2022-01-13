@@ -31,8 +31,8 @@ class DatabaseSeeder extends Seeder
             Category::factory()->create(['name' => $category]);
         }
 
-        //Create 10 users
-        User::factory(10)->create()->each(function ($user) {
+        //Create 25 users
+        User::factory(25)->create()->each(function ($user) {
 
             //Create a random number of boards per user.
             Board::factory(rand(0, 2))->create(['user_id' => $user->id])->each(function ($board) use ($user) {
