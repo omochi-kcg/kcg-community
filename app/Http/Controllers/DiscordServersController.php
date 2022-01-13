@@ -51,8 +51,16 @@ class DiscordServersController extends Controller
             });
         }
 
-        $servers = $servers->paginate(20);
-        return view('discord-servers.index', compact('categories', 'tags', 'servers'));
+        $servers = $servers->paginate(12);
+
+        $pagination = $servers->appends([
+            'search' => $request->get('search'),
+            'category' => $request->get('category'),
+            'tag' => $request->get('tag'),
+            'pagination' => $request->get('pagination'),
+        ]);
+
+        return view('discord-servers.index', compact('categories', 'tags', 'servers', 'pagination'));
     }
 
     public function create()
