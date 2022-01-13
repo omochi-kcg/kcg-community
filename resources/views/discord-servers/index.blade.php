@@ -9,7 +9,7 @@
                         <li class="inline xl:block">
                             <a class="items-center inline-block px-3 py-1 mt-3 ml-4 text-base text-white transition duration-500 ease-in-out transform bg-gray-400 rounded-lg xl:ml-0 xl:px-4 xl:py-2 xl:text-gray-900 xl:w-full xl:inline-flex focus:shadow-outline hover:bg-gray-700 xl:hover:bg-gray-50 xl:bg-white"
                                 href="?category={{ $category->id }}">
-                                <span class="xl:border-b-2 xl:border-gray-100 xl:ml-10">{{ $category->name }}</span>
+                                <span class="xl:border-b-2 xl:border-gray-100 xl:ml-10">{{ $category->name }}({{ $category->discord_servers_count }})</span>
                             </a>
                         </li>
                     @endforeach
