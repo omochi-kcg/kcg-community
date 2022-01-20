@@ -14,7 +14,7 @@ Route::middleware(['web'])->group(function () {
         ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 
     Route::get('/discord-servers/about', [DiscordServersController::class, 'about'])
-      ->name('discord-servers.about');
+        ->name('discord-servers.about');
 
     Route::resource('users', UsersController::class)
         ->only(['edit', 'update']);
