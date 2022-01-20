@@ -172,4 +172,9 @@ class DiscordServersController extends Controller
                 'status' => 'success',
             ]);
     }
+
+    public function about()
+    {
+        return view('discord-servers.about');
+    }
 }
