@@ -1,10 +1,10 @@
 <x-app-layout>
   <section class="text-gray-600 body-font">
     <div class="container px-5 pt-20 mx-auto">
-      <h1 class="title-font text-lg font-medium text-gray-600 mb-3">Discord-無期限招待リンクの作成方法</h1>
+      <h1 class="title-font text-2xl font-bold text-gray-700 mb-3">Discord-無期限招待リンクの作成方法</h1>
     </div>
     <div class="container px-5 py-10 mx-auto">
-      <h1 class="title-font text-lg font-medium text-gray-600 mb-3">①PCから作成</h1>
+      <h1 class="title-font text-xl font-medium text-gray-700 mb-3">①PCから作成</h1>
       <div class="flex flex-wrap -m-4">
         <div class="p-4 md:w-1/3">
           <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
@@ -36,7 +36,7 @@
       </div>
     </div>
     <div class="container px-5 py-10 mx-auto">
-      <h1 class="title-font text-lg font-medium text-gray-600 mb-3">②Androidから作成</h1>
+      <h1 class="title-font text-xl font-medium text-gray-700 mb-3">②Androidから作成</h1>
       <div class="flex flex-wrap -m-4">
         <div class="p-4 md:w-1/3">
           <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
@@ -59,7 +59,7 @@
       </div>
     </div>
     <div class="container px-5 py-10 mx-auto">
-      <h1 class="title-font text-lg font-medium text-gray-600 mb-3">①iPhone/iPadから作成</h1>
+      <h1 class="title-font text-xl font-medium text-gray-700 mb-3">③iPhone/iPadから作成</h1>
       <div class="flex flex-wrap -m-4">
         <div class="p-4 md:w-1/3">
           <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
