@@ -39,12 +39,13 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
+                {{-- メールを使用するようになったら使える --}}
+                {{-- @if (Route::has('password.request'))
                     <a class="text-sm text-gray-600 underline hover:text-gray-900"
                         href="{{ route('password.request') }}">
                         {{ __('Forgot your password?') }}
                     </a>
-                @endif
+                @endif --}}
 
                 <x-button class="ml-3">
                     {{ __('Log in') }}
