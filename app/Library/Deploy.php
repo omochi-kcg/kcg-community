@@ -81,7 +81,7 @@ class Deploy {
     public function __construct($options = array())
     {
 
-        $available_options = array('directory', 'work_dir', 'log', 'date_format', 'branch', 'remote', 'syncSubmodule', 'reset', 'git_bin_path');
+        $available_options = array('directory', 'work_dir', 'log', 'date_format', 'branch', 'remote', 'syncSubmodule', 'reset', 'git_bin_path', 'composer_bin_path');
 
         foreach ($options as $option => $value){
             if (in_array($option, $available_options)) {
