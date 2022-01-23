@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DeployController;
 use App\Http\Controllers\DiscordServersController;
 use App\Http\Controllers\HomesController;
 use App\Http\Controllers\UsersController;
@@ -22,6 +23,8 @@ Route::middleware(['web'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->middleware(['auth'])->name('dashboard');
+
+    Route::post('/deploy', [DeployController::class, 'index']);
 });
 
 require __DIR__ . '/auth.php';
