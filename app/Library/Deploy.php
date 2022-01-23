@@ -1,5 +1,5 @@
 <?php
-/** test
+/**
  * [Job] git Webhooks Auto Deployment PHP Sample Script
  *
  * PHP script to work with webhook to deploy your git repo
