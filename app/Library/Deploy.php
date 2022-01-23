@@ -15,6 +15,7 @@
 namespace App\Library;
 
 use Exception;
+use Illuminate\Support\Facades\Artisan;
 
 class Deploy {
 
@@ -139,6 +140,10 @@ class Deploy {
             // Git Submodule - Measure the execution time
             $strtedAt = microtime(true);
 
+            //Bring down Laravel during deploy
+            $this->log('Bringing down Laravel... ');
+            Artisan::call('down');
+
             // Discard any changes to tracked files since our last deploy
             if ($this->_reset) {
                 exec($this->_git_bin_path . ' --git-dir=' . $this->_directory . ' --work-tree=' . $this->_work_dir . ' reset --hard HEAD 2>&1', $output);
@@ -194,6 +199,37 @@ class Deploy {
             if (is_callable($this->post_deploy)) {
                 call_user_func($this->post_deploy, $this->_data);
             }
+
+            $this->log('Running composer...');
+            exec($this->_composer_bin_path . ' --working-dir=' . $this->_directory . ' install --no-interaction --prefer-dist --optimize-autoloader --no-dev');
+
+            //Run database migrations
+            $this->log('Running composer...');
+            Artisan::call('migrate', '--force');
+
+            //Clear caches
+            $this->log('Clear caches...');
+            Artisan::call('cache:clear');
+
+            //Clear expired password reset tokens
+            $this->log('Clear expired password reset tokens...');
+            Artisan::call('auth:clear-resets');
+
+            //Clear the route cache
+            $this->log('Clear the route cache...');
+            Artisan::call('route:cache');
+
+            //Clear the config cache
+            $this->log('Clear the config cache...');
+            Artisan::call('config:cache');
+
+            //Clear the view cache
+            $this->log('Clear the view cache...');
+            Artisan::call('view:cache');
+
+            //Bring Laravel back up
+            $this->log('Bring Laravel back up...');
+            Artisan::call('up');
 
             $this->log('Deployment successful.');
         } catch (Exception $e) {

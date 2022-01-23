@@ -22,5 +22,6 @@ return [
         'syncSubmodule' => false, // If your repo has submodule, set it true. (haven't tested it if this actually works)
         'reset'         => false, // If you want to git reset --hard every time you deploy, please set it true
         'git_bin_path'  => 'git',
+        'composer_bin_path' => 'composer',
     ],
 ];
