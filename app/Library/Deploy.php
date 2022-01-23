@@ -204,8 +204,8 @@ class Deploy {
             exec($this->_composer_bin_path . ' --working-dir=' . $this->_directory . ' install --no-interaction --prefer-dist --optimize-autoloader --no-dev');
 
             //Run database migrations
-            $this->log('Running composer...');
-            Artisan::call('migrate', '--force');
+            $this->log('Running migrate...');
+            Artisan::call('migrate', ['--force' => true]);
 
             //Clear caches
             $this->log('Clear caches...');
