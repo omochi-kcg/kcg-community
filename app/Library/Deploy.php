@@ -12,52 +12,9 @@
  * @version 4.0.1
  */
 
-/**
-* The TimeZone format used for logging.
-* @var Timezone
-* @link    http://php.net/manual/en/timezones.php
-*/
-date_default_timezone_set('Asia/Tokyo');
+namespace App\Library;
 
-/**
- * The Secret Key so that it's a bit more secure to run this script.
- * e.g.) https://example.com/deployments.php?key=EnterYourSecretKeyHere
- *
- * @var string
- */
-$secret_key = 'EnterYourSecretKeyHere';
-
-/**
-* The Options
-* Only 'directory' is required.
-* @var array
-*/
-$options = array(
-    'directory'     => '/path/to/git/repo', // Enter your server's git repo location
-    'work_dir'      => '/path/to/www',  // Enter your server's work directory. If you don't separate git and work directories, please leave it empty or false.
-    'log'           => 'deploy_log_filename.log', // relative or absolute path where you save log file. Set it to false without quotation mark if you don't need to save log file.
-    'branch'        => 'master', // Indicate which branch you want to checkout
-    'remote'        => 'origin', // Indicate which remote repo you want to fetch
-    'date_format'   => 'Y-m-d H:i:sP',  // Indicate date format of your log file
-    'syncSubmodule' => false, // If your repo has submodule, set it true. (haven't tested it if this actually works)
-    'reset'         => false, // If you want to git reset --hard every time you deploy, please set it true
-    'git_bin_path'  => 'git',
-);
-
-/**
- * Main Section: No need to modify below this line
- */
-if ($_GET['key'] === $secret_key)  {
-    $deploy = new Deploy($options);
-	$deploy->execute();
-    /*
-    $deploy->post_deploy = function() use ($deploy) {
-      // hit the wp-admin page to update any db changes
-       exec('curl http://example.com/wp-admin/upgrade.php?step=upgrade_db');
-       $deploy->log('Updating wordpress database... ');
-    };
-    */
-}
+use Exception;
 
 class Deploy {
 
