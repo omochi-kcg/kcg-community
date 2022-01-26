@@ -54,11 +54,6 @@
                             </x-dropdown>
                         </div>
                     @else
-                        <x-nav-link :href=" route('login')" :active="request()->routeIs('login')">
-                            Login
-                        </x-nav-link>
-                    </form>
-                    @else
                     <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
                         Login
                     </x-nav-link>
