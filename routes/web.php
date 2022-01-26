@@ -4,17 +4,27 @@ use App\Http\Controllers\DiscordServersController;
 use App\Http\Controllers\HomesController;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [HomesController::class, 'top'])
-    ->name('homes.top');
+Route::middleware(['web'])->group(function () {
 
-Route::resource('discord-servers', DiscordServersController::class)
-    ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
+    Route::get('/', [HomesController::class, 'top'])
+        ->name('homes.top');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+    Route::resource('discord-servers', DiscordServersController::class)
+        ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
+
+    Route::get('/discord-servers/about', [DiscordServersController::class, 'about'])
+        ->name('discord-servers.about');
+
+    Route::resource('users', UsersController::class)
+        ->only(['edit', 'update']);
+
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->middleware(['auth'])->name('dashboard');
+});
 
 Route::get('/board', [BoardController::class, 'board'])
     ->name('boards.board');

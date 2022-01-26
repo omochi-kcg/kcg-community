@@ -31,4 +31,9 @@ class DiscordServer extends Model
     {
         return $this->belongsToMany(Tag::class);
     }
+
+    public function discord_servers()
+    {
+        return $this->hasMany(DiscordServer::class);
+    }
 }
