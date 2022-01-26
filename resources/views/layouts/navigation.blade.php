@@ -10,12 +10,11 @@
                             <x-application-logo class="block w-auto h-10 text-gray-600 fill-current" />
                         </a>
                     </div>
-                    <x-nav-link :href="route('discord-servers.index')"
-                        :active="request()->routeIs('discord-servers.index')">
+                    <x-nav-link :href="route('discord-servers.index')" :active="request()->routeIs('discord-servers.index')">
                         Discordサーバ
                     </x-nav-link>
-                    <x-nav-link href="#" :active="false" {{-- :href="route('dashboard')" :active="request()->routeIs('dashboard')" --}}>
-                        掲示板(予定)
+                    <x-nav-link :href="route('boards.board')" :active="request()->routeIs('boards.board')">
+                        掲示板
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
@@ -58,20 +57,20 @@
                         <x-nav-link :href=" route('login')" :active="request()->routeIs('login')">
                             Login
                         </x-nav-link>
+                    </form>
+                    @else
+                    <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                        Login
+                    </x-nav-link>
                     @endif
                 </div>
 
                 <!-- Hamburger -->
                 <div class="flex items-center -mr-2 sm:hidden">
-                    <button @click="open = ! open"
-                        class="inline-flex items-center justify-center p-2 text-gray-400 transition duration-150 ease-in-out rounded-md hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500">
+                    <button @click="open = ! open" class="inline-flex items-center justify-center p-2 text-gray-400 transition duration-150 ease-in-out rounded-md hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500">
                         <svg class="w-6 h-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                            <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex"
-                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h16" />
-                            <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden"
-                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M6 18L18 6M6 6l12 12" />
+                            <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                            <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
                 </div>
@@ -99,15 +98,15 @@
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
 
-                        <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
+                    <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                            Logout
-                        </x-responsive-nav-link>
-                    </form>
-                @else
-                    <x-responsive-nav-link :href="route('login')" :active="request()->routeIs('login')">
-                        Login
+                        Logout
                     </x-responsive-nav-link>
+                </form>
+                @else
+                <x-responsive-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                    Login
+                </x-responsive-nav-link>
                 @endif
             </div>
         </div>

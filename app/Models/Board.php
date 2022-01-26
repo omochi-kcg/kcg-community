@@ -7,13 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Board extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
-	public function user() {
+	protected $fillable = [
+		'user_id',
+		'title',
+		'description'
+	];
+
+	public function user()
+	{
 		return $this->belongsTo(User::class);
 	}
 
-    public function comments() {
+	public function comments()
+	{
 		return $this->hasMany(Comment::class);
 	}
 }
