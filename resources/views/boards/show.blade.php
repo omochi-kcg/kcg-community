@@ -40,7 +40,7 @@
                                         @if (Auth::id() === $comment->user_id)
                                         <button class="text-red-500">[×]</button>
                                         @endif
-                                        <p class="my-2 leading-relaxed text-gray-500 font-bold"> 投稿者: {{ $board->user->name }}</p>
+                                        <p class="my-2 leading-relaxed text-gray-500 font-bold"> 投稿者: {{ $comment->user->name }}</p>
                                     </div>
                                 </form>
                                 {{ $comment -> body }}
