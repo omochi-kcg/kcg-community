@@ -33,12 +33,12 @@
                             <h2 class="mt-4 text-lg font-medium text-gray-900 sm:text-xl title-font border-b-2 border-gray-100">コメント</h2>
                             @foreach($board->comments as $comment)
                             <li class="list-none my-2">
-                                <form method="post" action="{{ route('comments.destroy', $comment) }}" class="delete-comment">
+                                <form method="post" action="{{ route('comments.destroy', $comment) }}">
                                     @method('DELETE')
                                     @csrf
                                     <div class="flex">
                                         @if (Auth::id() === $comment->user_id)
-                                        <button class="text-red-500">[×]</button>
+                                        <button class="text-red-500" class="delete-comment">[×]</button>
                                         @endif
                                         <p class="my-2 leading-relaxed text-gray-500 font-bold"> 投稿者: {{ $comment->user->name }}</p>
                                     </div>
