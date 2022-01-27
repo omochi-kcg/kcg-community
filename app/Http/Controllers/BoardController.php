@@ -65,6 +65,10 @@ class BoardController extends Controller
 
     public function destroy(Board $board)
     {
+        foreach ($board->comments as $comment) {
+            $comment->delete();
+        }
+
         $board->delete();
 
         return redirect()
