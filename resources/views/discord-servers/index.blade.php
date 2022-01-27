@@ -44,7 +44,7 @@
                     </button>
                 </form>
                 <div class="my-4 text-right">
-                    <a href="{{ route('discord-servers.create') }}" type="button"
+                    <a href="{{ route('discord-servers.create') }}"
                         class="inline-flex items-center px-4 py-2 font-bold text-white bg-indigo-500 rounded hover:bg-indigo-600 ">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">

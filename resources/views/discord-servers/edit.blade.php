@@ -75,7 +75,7 @@
                             <div class="mt-4 text-right">
                                 <button
                                     class="px-8 py-2 text-lg font-bold text-white bg-indigo-500 border-0 rounded focus:outline-none hover:bg-indigo-600">
-                                    作成
+                                    更新
                                 </button>
                             </div>
                     </form>
