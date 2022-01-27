@@ -80,9 +80,9 @@ class DiscordServersController extends Controller
                     'name' => $request->name,
                     'description' => $request->description,
                 ]);
-                $tagIds = [];
                 // 空白と重複を除去
                 if (!is_null($request->tags)) {
+                    $tagIds = [];
                     $tagNames = array_unique(array_filter($request->tags));
                     foreach ($tagNames as $tagName) {
                         $tag = Tag::where('name', $tagName)->firstOrCreate([
@@ -122,16 +122,18 @@ class DiscordServersController extends Controller
                 $server->description = $request->description;
                 $server->save();
 
-                $tagIds = [];
                 // 空白と重複を除去
-                $tagNames = array_unique(array_filter($request->tags));
-                foreach ($tagNames as $tagName) {
-                    $tag = Tag::where('name', $tagName)->firstOrCreate([
-                        'name' => $tagName
-                    ]);
-                    $tagIds[] = $tag->id;
+                if (!is_null($request->tags)) {
+                    $tagIds = [];
+                    $tagNames = array_unique(array_filter($request->tags));
+                    foreach ($tagNames as $tagName) {
+                        $tag = Tag::where('name', $tagName)->firstOrCreate([
+                            'name' => $tagName
+                        ]);
+                        $tagIds[] = $tag->id;
+                    }
+                    $server->tags()->sync($tagIds);
                 }
-                $server->tags()->sync($tagIds);
             });
         } catch (Throwable $e) {
             Log::error($e);
