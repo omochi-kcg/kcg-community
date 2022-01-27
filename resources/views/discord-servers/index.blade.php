@@ -71,7 +71,7 @@
                                 @endforeach
                             </div>
                             <h3 class="my-4 text-lg font-semibold text-green-900">説明</h3>
-                            <p class="mb-4 leading-relaxed">
+                            <p class="mb-4 leading-relaxed break-all">
                                 {!! nl2br(e($server->description)) !!}
                             </p>
                             <p class="my-2 font-semibold leading-relaxed">作成者: {{ $server->user->name }}</p>
