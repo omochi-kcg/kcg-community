@@ -51,7 +51,7 @@ class DiscordServersController extends Controller
             });
         }
 
-        $servers = $servers->paginate(12);
+        $servers = $servers->orderBy('name', 'desc')->paginate(12);
 
         $pagination = $servers->appends([
             'search' => $request->get('search'),
