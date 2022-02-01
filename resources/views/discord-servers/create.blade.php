@@ -3,7 +3,7 @@
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <h1 class="text-xl text-center">サーバー登録</h1>
+                    <h1 class="text-xl font-bold text-center">サーバー登録</h1>
 
                     <form action="{{ route('discord-servers.store') }}" method="post"
                         class="grid grid-cols-1 gap-6 mt-16 md:mx-16 lg:mx-24 xl:mx-28">
@@ -16,13 +16,13 @@
                             </ul>
                         @endif
                         <label class="block">
-                            <span class="text-gray-700">サーバー名</span>
+                            <span class="font-semibold text-gray-700">サーバー名</span>
                             <input name="name" type="text" value="{{ old('name') }}"
                                 class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                 required>
                         </label>
                         <div>
-                            <span class="text-gray-700">招待URL ※無期限URLにしてください。</span>
+                            <span class="font-semibold text-gray-700">招待URL </span>※無期限URLにしてください。
                             <label class="block">
                                 <input name="url" type="url" value="{{ old('url') }}"
                                     class="block w-full my-1 placeholder-gray-300 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
@@ -31,7 +31,7 @@
                             <a href="{{ route('discord-servers.about') }}" target="_blank"
                                 class="text-indigo-500 hover:text-indigo-600">期限なしURL取得方法</a>
                             <label class="block mt-2">
-                                <span class="text-gray-700">カテゴリ</span>
+                                <span class="font-semibold text-gray-700">カテゴリ</span>
                                 <select name="category_id"
                                     class="block w-full mt-1 text-gray-700 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                     @foreach ($categories as $category)
@@ -41,7 +41,7 @@
                                 </select>
                             </label>
                             <label class="block mt-2 text-gray-700" id="tag">
-                                <span>#タグ</span>
+                                <span class="font-semibold">#タグ</span>
                                 @if (!is_null(old('tags')))
                                     @foreach (array_unique(array_filter(old('tags'))) as $tagName)
                                     <input type="text" name="tags[]" value="{{ $tagName }}"
@@ -61,7 +61,7 @@
                             </button>
 
                             <label class="block my-2">
-                                <span class="text-gray-700">説明</span>
+                                <span class="font-semibold text-gray-700">説明</span>
                                 <textarea name="description"
                                     class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                     rows="10" required>{{ old('description') }}</textarea>
