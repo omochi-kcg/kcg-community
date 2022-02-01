@@ -26,7 +26,7 @@ class DiscordServersEditRequest extends FormRequest
     {
         return [
             'name' => ['required', 'max:25'],
-            'url' => ['required', 'url', Rule::unique('discord_servers')->ignore($this->discord_server), 'max:50'],
+            'url' => ['required', 'url', Rule::unique('discord_servers')->ignore($this->discord_server), 'max:50', 'regex:^(https?:\/\/)?(www\.)?(discord\.(gg|io|me|li)|discordapp\.com\/invite)\/.+[a-z]^'],
             'category_id' => ['required', 'integer', 'exists:categories,id'],
             'tags' => ['nullable', 'array', 'max:4'],
             'tags.*' => ['nullable', 'string', 'max:25'],
