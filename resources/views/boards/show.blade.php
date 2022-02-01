@@ -8,12 +8,12 @@
                     </div>
 
                     <div class="flex-wrap md:flex">
-                        <div class="flex flex-col items-start break-all w-full p-12 border-2 mt-6 shadow rounded-2xl md:p-8 xl:p-6 lg:p-8">
+                        <div class="flex flex-col items-start break-all w-full p-6 border-2 mt-6 shadow rounded-2xl md:p-8 xl:p-8 lg:p-8">
                             <div class="flex justify-start w-full space-x-2">
                                 <h2 class="mb-4 text-2xl font-extrabold text-gray-900 sm:text-3xl title-font">
                                     <span>{{ $board->title }}</span></br>
                                     @if (Auth::id() === $board->user_id)
-                                    <a href="{{ route('boards.edit', $board) }}" class="px-2 py-1 text-base font-semibold text-center text-white transition duration-200 ease-in bg-green-500 shadow-md md:px-4 md:py-2 hover:bg-green-600 focus:ring-green-400 focus:ring-offset-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2">編集</a>
+                                    <a href="{{ route('boards.edit', $board) }}" class="px-2 py-1 inline-block text-base font-semibold text-center text-white transition duration-200 ease-in bg-green-500 shadow-md md:px-4 md:py-2 hover:bg-green-600 focus:ring-green-400 focus:ring-offset-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2">編集</a>
                                     <form method="post" action="{{ route('boards.destroy', $board) }}" id="delete_post" class="inline">
                                         @method('DELETE')
                                         @csrf
@@ -22,28 +22,28 @@
                                     @endif
                                 </h2>
                             </div>
-                            <time class="text-secondary">
+                            <time class="text-secondary text-gray-500 font-semibold">
                                 投稿日時: {{ $board->created_at->format('Y/m/d H:i') }}
                             </time>
-                            <p class="mb-2 leading-relaxed">作成者: {{ $board->user->name }}</p>
+                            <p class="mb-2 leading-relaxed text-gray-500 font-semibold">作成者: {{ $board->user->name }}</p>
                             <p class="mb-4 leading-relaxed">
-                                {{ $board->description }}
+                                {!! nl2br(e($board->description)) !!}
                             </p>
 
                             <h2 class="mt-4 text-lg font-medium text-gray-900 sm:text-xl title-font border-b-2 border-gray-100">コメント</h2>
                             @foreach($board->comments as $comment)
                             <li class="list-none my-2">
-                                <form method="post" action="{{ route('comments.destroy', $comment) }}">
+                                <form method="post" action="{{ route('comments.destroy', $comment) }}" class="delete-comment">
                                     @method('DELETE')
                                     @csrf
                                     <div class="flex">
                                         @if (Auth::id() === $comment->user_id)
-                                        <button class="text-red-500" class="delete-comment">[×]</button>
+                                        <button class="text-red-500">[×]</button>
                                         @endif
-                                        <p class="my-2 leading-relaxed text-gray-500 font-bold"> 投稿者: {{ $comment->user->name }}</p>
+                                        <p class="my-2 leading-relaxed text-gray-500 font-semibold"> 投稿者: {{ $comment->user->name }}</p>
                                     </div>
                                 </form>
-                                {{ $comment -> body }}
+                                {!! nl2br(e($comment -> body)) !!}
                             </li>
                             @endforeach
 
@@ -53,7 +53,7 @@
                                     <textarea name="body" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" rows="5" required></textarea>
                                 </label>
                                 <div class="mt-4 text-left">
-                                    <button class="px-8 py-2 text-lg font-bold text-white bg-indigo-500 border-0 rounded focus:outline-none hover:bg-indigo-600">
+                                    <button class="px-8 py-2 text-lg font-semibold text-white bg-indigo-500 border-0 rounded focus:outline-none hover:bg-indigo-600">
                                         コメントを投稿する
                                     </button>
                                 </div>

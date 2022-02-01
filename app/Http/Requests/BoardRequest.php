@@ -24,17 +24,14 @@ class BoardRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|max:50',
-            'description' => 'required',
+            'title' => 'max:50',
         ];
     }
 
     public function messages()
     {
         return [
-            'title.required' => 'タイトルは必須です',
-            'title.min' => ':max 文字以内で入力してください',
-            'description.required' => '本文は必須です',
+            'title.max' => 'タイトルは :max 文字以内で入力してください',
         ];
     }
 }
