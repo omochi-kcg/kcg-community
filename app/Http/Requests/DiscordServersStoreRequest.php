@@ -25,7 +25,7 @@ class DiscordServersStoreRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:25'],
-            'url' => ['required', 'url', 'unique:discord_servers', 'max:50'],
+            'url' => ['required', 'url', 'unique:discord_servers', 'max:50', 'regex:^(https?:\/\/)?(www\.)?(discord\.(gg|io|me|li)|discordapp\.com\/invite)\/.+[a-z]^'],
             'category_id' => ['required', 'integer', 'exists:categories,id'],
             'tags' => ['nullable', 'array', 'max:4'],
             'tags.*' => ['nullable', 'string', 'max:25'],
