@@ -32,4 +32,11 @@ class DiscordServersStoreRequest extends FormRequest
             'description' => ['required', 'string', 'max:500'],
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'url.regex' => 'Discordの招待URLを入力してください',
+        ];
+    }
 }
