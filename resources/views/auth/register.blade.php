@@ -16,7 +16,7 @@
 
             <!-- Email Address -->
             <div class="mt-4">
-                <x-label for="email" :value="__('Email')" />
+                <x-label for="email" value="KCGのメールアドレス" />
 
                 <x-input id="email" class="block w-full mt-1" type="email" name="email" :value="old('email')" required />
             </div>
