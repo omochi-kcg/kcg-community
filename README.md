@@ -34,3 +34,4 @@
 
 -   Git
 -   Docker
+-   AWS(EC2) -> herokuに変更(課金されてしまったため)
