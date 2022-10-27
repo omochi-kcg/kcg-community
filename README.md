@@ -1,5 +1,9 @@
 # KCG 交流サイト
 
+## アプリケーションの URL
+
+https://kcg-community.herokuapp.com/
+
 ## ターゲット
 
 -   京都コンピュータ学院の生徒(KCG 生)
